@@ -95,7 +95,7 @@ function App() {
     <Grommet theme={theme} full>
       <ResponsiveContext.Consumer>
         {size => (
-          <Box fill background="linear-gradient(142.77deg, #F9EAF3 -9.18%, grey 209.09%)">
+          <Box fill background={{image: 'url(flamingo.jpg)'}}>
           
             <AppBar>
               <Heading level='3' margin='none'>thryngabriel.com</Heading>
@@ -106,35 +106,40 @@ function App() {
             
 
             <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-              <Box flex align='center' justify="center">
+              <Box flex align='center' justify="center" >
+                <Box border={{color: "#d470a2", size: "large"}} background={"white"} pad="large" >
                 <Heading level={2} size={'large'}>
                   {'Kathryn Gabriel'}
                 </Heading> 
-                <Text>Hi, I'm Katie. I like developing software.</Text>
+                <Text alignSelf="center">Hi, I'm Katie. I like developing software.</Text>
+                <Heading alignSelf="center" level={4} size={'small'}>k@thryngabriel.com</Heading>
+                </Box>
               </Box>
               <Box flex align='center' justify='center'>
                 <Box pad='large' fill justify="center">
-                  <Heading level={3} size={'medium'}>What I'm excited about:</Heading>
-                  <Grid gap="medium" rows="small" columns={{ count: 'fit', size: 'small' }}>
-                    {data.map((value) => (
-                      <Card background={value.color} key={value.message}>
-                        <CardBody pad="small">
-                          <Identifier
-                            pad="small"
-                            title={value.title}
-                            subTitle={value.subTitle}
-                            size="small"
-                            align="start"
-                          >
-                            {value.icon}
-                          </Identifier>
-                        </CardBody>
-                        <CardFooter pad={{ horizontal: 'medium', vertical: 'small' }}>
-                          <Text size="xsmall">{value.message}</Text>
-                        </CardFooter>
-                      </Card>
-                    ))}
-                  </Grid>
+                  <Box background={"white"} round pad="medium" border={{color: "#d470a2", size: "medium"}} overflow={{vertical: "auto"}}>
+                    <Heading level={3} size={'medium'}>What I'm excited about:</Heading>
+                    <Grid gap="medium" rows="small" columns={{ count: 'fit', size: 'small' }}>
+                      {data.map((value) => (
+                        <Card background={value.color} key={value.message}>
+                          <CardBody pad="small">
+                            <Identifier
+                              pad="small"
+                              title={value.title}
+                              subTitle={value.subTitle}
+                              size="small"
+                              align="start"
+                            >
+                              {value.icon}
+                            </Identifier>
+                          </CardBody>
+                          <CardFooter pad={{ horizontal: 'medium', vertical: 'small' }}>
+                            <Text size="xsmall">{value.message}</Text>
+                          </CardFooter>
+                        </Card>
+                      ))}
+                    </Grid>
+                  </Box>
                 </Box>
               </Box>
               {(!showSidebar || size !== 'small') ? (
