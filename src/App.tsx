@@ -37,9 +37,8 @@ function App() {
     return 'row'
   }
   function isMobile() {
-    alert(window.innerWidth.toString())
-    return window.innerWidth < 1536
-  }
+    return window.innerWidth < 1536;
+  } 
 
   return (
       <Grommet theme={theme} full={!isMobile()}>  
