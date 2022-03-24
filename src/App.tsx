@@ -4,53 +4,10 @@ import { Grommet, Box, Button, Heading, Collapsible, BoxExtendedProps, Responsiv
 import { Notification, FormClose, Domain, PhoneVertical, Test, LineChart, Linkedin, Github, ServerCluster, System, Menu} from 'grommet-icons';
 import { Social } from "./Social";
 import { theme } from "./GlobalTheme";
+import { CardGrid } from "./CardGrid";
 
 
-const data = [
-  {
-    color: 'card',
-    icon: <Domain size="large" />,
-    title: 'Web',
-    subTitle: 'React, TypeScript, ASP.NET, Django',
-    message: '1.5 years',
-  },
-  {
-    color: 'card',
-    icon: <PhoneVertical size='large' />,
-    title: 'Mobile',
-    subTitle: 'Android (Kotlin), React Native',
-    message: '2 years'
-  },
-  {
-    color: 'card',
-    icon: <ServerCluster size='large' />,
-    title: 'Database',
-    subTitle: 'PostgreSQL, MongoDB, ORM frameworks',
-    message: '1.5 years'
-  },
-  {
-    color: 'card',
-    icon: <Test size='large' />,
-    title: 'Data Science',
-    subTitle: 'Scikitlearn (Python)',
-    message: '6 months'
-  },
-  {
-    color: 'card',
-    icon: <LineChart size='large' />,
-    title: 'Data Visualization',
-    subTitle: 'D3.js, React, TypeScript',
-    message: '3 months'
-  },
-  {
-    color: 'card',
-    icon: <System size='large' />,
-    title: 'Embedded Systems',
-    subTitle: 'Arduino (C++)',
-    message: '9 months'
-  },
-  
-];
+
 
 const AppBar = (props: JSX.IntrinsicAttributes & BoxExtendedProps & { children?: React.ReactNode; }) => (
   <Box
@@ -66,36 +23,30 @@ const AppBar = (props: JSX.IntrinsicAttributes & BoxExtendedProps & { children?:
   />
 );
 
-interface IdentifierProps {
-  children: any,
-  title: string,
-  subTitle: string,
-  size: string,
-  pad: string
-  align: string
-}
-const Identifier = ({ children, title, subTitle, size, pad, align, ...rest }: IdentifierProps) => (
-  <Box gap="small" align={align} pad={pad} {...rest}>
-    {children}
-    <Box>
-      <Text size={size} weight="bold">
-        {title}
-      </Text>
-      <Text size={size}>{subTitle}</Text>
-    </Box>
-  </Box>
-);
+
 
 //F9EAF3
 
+
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [isNarrow, setIsNarrow] = useState(true)
+
+  function getContentDirection(size: string) {
+    if(size == 'small') return 'column'
+    return 'row'
+  }
+  function isMobile() {
+    alert(window.innerWidth.toString())
+    return window.innerWidth < 1536
+  }
 
   return (
-    <Grommet theme={theme} full>
+      <Grommet theme={theme} full={!isMobile()}>  
       <ResponsiveContext.Consumer>
         {size => (
-          <Box fill background={{image: 'url(flamingo.jpg)'}}>
+          
+          <Box fill background={{image: 'url(flamingo.jpg)'}} flex="grow">
           
             <AppBar>
               <Heading level='3' margin='none'>thryngabriel.com</Heading>
@@ -103,42 +54,21 @@ function App() {
             </AppBar>
 
             
-            
-
-            <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
+            <Box direction={getContentDirection(size)} flex>
               <Box flex align='center' justify="center" >
-                <Box border={{color: "#d470a2", size: "large"}} background={"white"} pad="large" >
+                <Box border={{color: "card_over", size: "large"}} background={"white"} pad="large" >
                 <Heading level={2} size={'large'}>
                   {'Kathryn Gabriel'}
                 </Heading> 
                 <Text alignSelf="center">Hi, I'm Katie. I like developing software.</Text>
-                <Heading alignSelf="center" level={4} size={'small'}>k@thryngabriel.com</Heading>
+                <Heading alignSelf="center" level={4} size={'small'} color={"#d470a2"}>k@thryngabriel.com</Heading>
                 </Box>
               </Box>
-              <Box flex align='center' justify='center'>
-                <Box pad='large' fill justify="center">
-                  <Box background={"white"} round pad="medium" border={{color: "#d470a2", size: "medium"}} overflow={{vertical: "auto"}}>
+              <Box flex align='center' justify='center' >
+                <Box pad='large' fill justify="center" height={'xlarge'}>
+                  <Box background={"white"} round pad="medium" border={{color: "#d470a2", size: "medium"}} overflow={{vertical: 'auto'}} >
                     <Heading level={3} size={'medium'}>What I'm excited about:</Heading>
-                    <Grid gap="medium" rows="small" columns={{ count: 'fit', size: 'small' }}>
-                      {data.map((value) => (
-                        <Card background={value.color} key={value.message}>
-                          <CardBody pad="small">
-                            <Identifier
-                              pad="small"
-                              title={value.title}
-                              subTitle={value.subTitle}
-                              size="small"
-                              align="start"
-                            >
-                              {value.icon}
-                            </Identifier>
-                          </CardBody>
-                          <CardFooter pad={{ horizontal: 'medium', vertical: 'small' }}>
-                            <Text size="xsmall">{value.message}</Text>
-                          </CardFooter>
-                        </Card>
-                      ))}
-                    </Grid>
+                    <CardGrid />
                   </Box>
                 </Box>
               </Box>
@@ -175,17 +105,17 @@ function App() {
                     align='center'
                     justify='center'
                   >
-                    sidebar
+                    please hire me
                   </Box>
                 </Layer>
               )}
             </Box>
-          
             <Social />
           </Box>
+          
         )}
       </ResponsiveContext.Consumer>
-    </Grommet>
+      </Grommet>
   );
 }
 
