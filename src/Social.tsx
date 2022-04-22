@@ -21,15 +21,27 @@ const Media = () => {
 
 export const Social = () => { return(
     <Grommet theme={theme}>
-        <Footer background='#333333' pad='small' align='center'>
-            <Box align='center' direction='row' gap='xsmall'>
+        <Footer background='#333333' pad='small' align='center' >
+            <Box direction='row' gap='xsmall' justify='between'>
                 <Text alignSelf='center' color='brand' size='small'>
                     Thanks for visiting! Check out my socials --&gt;
                 </Text>
                 <Media />
-                <Text textAlign='center' size='xsmall'>
-                    ©Copyright 2020 Kathryn Gabriel
+                <Box direction='row' gap='medium' align='center'>
+
+                
+                <Text alignSelf='center' textAlign='center' size='xsmall' color='brand'>
+                    ©Copyright 2022 Kathryn Gabriel
                 </Text>
+                <Anchor
+                    a11yTitle='Flamingo icons created by Freepik - Flaticon'
+                    label='Flamingo icons created by Freepik - Flaticon'
+                    href='https://www.flaticon.com/free-icons/flamingo'
+                    size='xsmall'
+                    weight='normal'
+                    color='brand'
+                />
+                </Box>
             </Box>
         </Footer>
     </Grommet>
