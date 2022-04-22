@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Card, CardBody, CardFooter, Text, Box } from "grommet";
+import { Grid, Card, CardBody, CardFooter, Text, Box, Heading } from "grommet";
 import { Domain, PhoneVertical, ServerCluster, Test, LineChart, System } from "grommet-icons";
 import { theme } from './GlobalTheme';
 
@@ -49,7 +49,7 @@ const data = [
     
   ];
 
-interface IdentifierProps {
+interface InterestCardProps {
     children: any,
     title: string,
     subTitle: string,
@@ -57,7 +57,7 @@ interface IdentifierProps {
     pad: string
     align: string
   }
-  const Identifier = ({ children, title, subTitle, size, pad, align, ...rest }: IdentifierProps) => (
+  const InterestCard = ({ children, title, subTitle, size, pad, align, ...rest }: InterestCardProps) => (
     <Box gap="small" align={align} pad={pad} {...rest}>
       {children}
       <Box>
@@ -70,8 +70,12 @@ interface IdentifierProps {
   );
 
 
+interface CardGridProps{
+    clickFunc: (id: string) => void;
+}
 
-export function CardGrid() {
+export function CardGrid(props: CardGridProps) {
+    const [gridState, setGridState] = React.useState(false);
     const [hoverId, setHoverId] = React.useState("");
 
     function colorByKey(key: string) {
@@ -80,25 +84,30 @@ export function CardGrid() {
     };
 
     return(
+        <Box pad='large' fill justify="center" height={'xlarge'}>
+                  <Box background={"white"} round pad="medium" border={{color: "#d470a2", size: "medium"}} overflow={{vertical: 'auto'}} >
+                    <Heading level={3} size={'medium'}>What I'm excited about:</Heading>
         <Grid gap="medium" rows="small" columns={{ count: 'fit', size: 'small' }}>
             {data.map((value) => (
-            <Card background={colorByKey(value.id)} key={value.message} onMouseEnter={() => setHoverId(value.id)} onMouseLeave={() => setHoverId("")}>
-                <CardBody pad="small">
-                <Identifier
-                    pad="small"
-                    title={value.title}
-                    subTitle={value.subTitle}
-                    size="small"
-                    align="start"
-                >
-                    {value.icon}
-                </Identifier>
-                </CardBody>
-                <CardFooter pad={{ horizontal: 'medium', vertical: 'small' }}>
-                <Text size="xsmall">{value.message}</Text>
-                </CardFooter>
-            </Card>
-            ))}
+                <Card background={colorByKey(value.id)} key={value.message} onMouseEnter={() => setHoverId(value.id)} onMouseLeave={() => setHoverId("")} onClick={() => props.clickFunc(value.id)}>
+                    <CardBody pad="small">
+                    <InterestCard
+                        pad="small"
+                        title={value.title}
+                        subTitle={value.subTitle}
+                        size="small"
+                        align="start"
+                    >
+                        {value.icon}
+                    </InterestCard>
+                    </CardBody>
+                    <CardFooter pad={{ horizontal: 'medium', vertical: 'small' }}>
+                    <Text size="xsmall">{value.message}</Text>
+                    </CardFooter>
+                </Card>)
+            )}
         </Grid>
+        </Box>
+                </Box>
     );
 }

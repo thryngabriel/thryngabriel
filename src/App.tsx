@@ -40,6 +40,10 @@ function App() {
     return window.innerWidth < 1536;
   } 
 
+  const toggleDisplay = (id: string) => {
+    alert(id)
+  }
+
   return (
       <Grommet theme={theme} full={!isMobile()}>  
       <ResponsiveContext.Consumer>
@@ -52,7 +56,6 @@ function App() {
               <Button icon={<Menu/>} onClick={() => {setShowSidebar(!showSidebar)}} />
             </AppBar>
 
-            
             <Box direction={getContentDirection(size)} flex>
               <Box flex align='center' justify="center" >
                 <Box border={{color: "card_over", size: "large"}} background={"white"} pad="large" >
@@ -64,12 +67,7 @@ function App() {
                 </Box>
               </Box>
               <Box flex align='center' justify='center' >
-                <Box pad='large' fill justify="center" height={'xlarge'}>
-                  <Box background={"white"} round pad="medium" border={{color: "#d470a2", size: "medium"}} overflow={{vertical: 'auto'}} >
-                    <Heading level={3} size={'medium'}>What I'm excited about:</Heading>
-                    <CardGrid />
-                  </Box>
-                </Box>
+                <CardGrid clickFunc={toggleDisplay}/> 
               </Box>
               {(!showSidebar || size !== 'small') ? (
                 <Collapsible direction="horizontal" open={showSidebar}>
