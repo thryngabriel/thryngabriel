@@ -5,6 +5,7 @@ import { Notification, FormClose, Domain, PhoneVertical, Test, LineChart, Linked
 import { Social } from "./Social";
 import { theme } from "./GlobalTheme";
 import { CardGrid } from "./CardGrid";
+import { CardDetail } from "./CardDetail";
 
 
 
@@ -30,7 +31,7 @@ const AppBar = (props: JSX.IntrinsicAttributes & BoxExtendedProps & { children?:
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [isNarrow, setIsNarrow] = useState(true)
+  const [cardState, setCardState] = useState(true)
 
   function getContentDirection(size: string) {
     if(size == 'small') return 'column'
@@ -42,6 +43,7 @@ function App() {
 
   const toggleDisplay = (id: string) => {
     alert(id)
+    setCardState(false)
   }
 
   return (
@@ -67,7 +69,17 @@ function App() {
                 </Box>
               </Box>
               <Box flex align='center' justify='center' >
-                <CardGrid clickFunc={toggleDisplay}/> 
+                <Box pad='large' fill justify="center" height={'xlarge'}>
+                  <Box background={"white"} round pad="medium" border={{color: "#d470a2", size: "medium"}} overflow={{vertical: 'auto'}} >
+                    {cardState ? (
+                      <CardGrid clickFunc={toggleDisplay}/> 
+                    ):
+                      <CardDetail />
+                    }
+                    
+                    
+                  </Box>
+                </Box>
               </Box>
               {(!showSidebar || size !== 'small') ? (
                 <Collapsible direction="horizontal" open={showSidebar}>

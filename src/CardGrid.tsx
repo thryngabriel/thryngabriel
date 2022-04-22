@@ -75,7 +75,6 @@ interface CardGridProps{
 }
 
 export function CardGrid(props: CardGridProps) {
-    const [gridState, setGridState] = React.useState(false);
     const [hoverId, setHoverId] = React.useState("");
 
     function colorByKey(key: string) {
@@ -84,30 +83,28 @@ export function CardGrid(props: CardGridProps) {
     };
 
     return(
-        <Box pad='large' fill justify="center" height={'xlarge'}>
-                  <Box background={"white"} round pad="medium" border={{color: "#d470a2", size: "medium"}} overflow={{vertical: 'auto'}} >
-                    <Heading level={3} size={'medium'}>What I'm excited about:</Heading>
-        <Grid gap="medium" rows="small" columns={{ count: 'fit', size: 'small' }}>
-            {data.map((value) => (
-                <Card background={colorByKey(value.id)} key={value.message} onMouseEnter={() => setHoverId(value.id)} onMouseLeave={() => setHoverId("")} onClick={() => props.clickFunc(value.id)}>
-                    <CardBody pad="small">
-                    <InterestCard
-                        pad="small"
-                        title={value.title}
-                        subTitle={value.subTitle}
-                        size="small"
-                        align="start"
-                    >
-                        {value.icon}
-                    </InterestCard>
-                    </CardBody>
-                    <CardFooter pad={{ horizontal: 'medium', vertical: 'small' }}>
-                    <Text size="xsmall">{value.message}</Text>
-                    </CardFooter>
-                </Card>)
-            )}
-        </Grid>
-        </Box>
-                </Box>
+        <div>
+                <Heading level={3} size={'medium'}>What I'm excited about:</Heading>
+                    <Grid gap="medium" rows="small" columns={{ count: 'fit', size: 'small' }}>
+                        {data.map((value) => (
+                            <Card background={colorByKey(value.id)} key={value.message} onMouseEnter={() => setHoverId(value.id)} onMouseLeave={() => setHoverId("")} onClick={() => props.clickFunc(value.id)}>
+                                <CardBody pad="small">
+                                <InterestCard
+                                    pad="small"
+                                    title={value.title}
+                                    subTitle={value.subTitle}
+                                    size="small"
+                                    align="start"
+                                >
+                                    {value.icon}
+                                </InterestCard>
+                                </CardBody>
+                                <CardFooter pad={{ horizontal: 'medium', vertical: 'small' }}>
+                                <Text size="xsmall">{value.message}</Text>
+                                </CardFooter>
+                            </Card>)
+                        )}
+                    </Grid>
+                    </div>
     );
 }
