@@ -6,9 +6,7 @@ import { Social } from "./Social";
 import { theme } from "./GlobalTheme";
 import { CardGrid } from "./CardGrid";
 import { CardDetail } from "./CardDetail";
-import { CardState } from "./data/CardState";
-
-
+import { IExperience } from "./data/cardData";
 
 
 const AppBar = (props: JSX.IntrinsicAttributes & BoxExtendedProps & { children?: React.ReactNode; }) => (
@@ -27,7 +25,7 @@ const AppBar = (props: JSX.IntrinsicAttributes & BoxExtendedProps & { children?:
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [cardState, setCardState] = useState(CardState.Grid)
+  const [cardSelected, setCardSelected] = useState<IExperience|null>(null);
 
   function getContentDirection(size: string) {
     if(size == 'small') return 'column'
@@ -37,9 +35,8 @@ function App() {
     return window.innerWidth < 1536;
   } 
 
-  const toggleDisplay = (state: CardState) => {
-    alert(state.toString());
-    setCardState(state);
+  const toggleDisplay = (card: IExperience|null) => {
+    setCardSelected(card);
   }
 
   return (
@@ -67,10 +64,10 @@ function App() {
               <Box flex align='center' justify='center' >
                 <Box pad='large' fill justify="center" height={'xlarge'}>
                   <Box background={"white"} round pad="medium" border={{color: "#d470a2", size: "medium"}} overflow={{vertical: 'auto'}} >
-                    {cardState == CardState.Grid ? (
+                    {cardSelected == null ? (
                       <CardGrid clickFunc={toggleDisplay}/> 
                     ):
-                      <CardDetail cardState={cardState}/>
+                      <CardDetail experience={cardSelected}/>
                     }
                   </Box>
                 </Box>

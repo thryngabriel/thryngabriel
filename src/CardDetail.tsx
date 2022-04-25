@@ -1,14 +1,18 @@
-import { Text } from 'grommet';
-import React from 'react';
-import { CardState } from './data/CardState';
+import { Box, Text } from 'grommet';
+import React, { useEffect } from 'react';
+import { data, IExperience } from './data/cardData';
 
 
 interface CardDetailProps {
-    cardState: CardState
+    experience: IExperience
 }
-export function CardDetail(props: CardDetailProps) { 
-
+export function CardDetail(props: CardDetailProps){ 
+ 
+    
     return(
-        <Text>Hello world {props.cardState}</Text>
+        <Box>
+            <Text>Hello world {props.experience.name}</Text>
+            <Text>{props.experience.language}]</Text>
+        </Box>
     )
 }

@@ -1,49 +1,55 @@
 import React from 'react';
 import { Domain, PhoneVertical, ServerCluster, Test, LineChart, System } from "grommet-icons";
-import { CardState } from "./CardState";
 
-export const data = [
+export interface IExperience{
+    id: number,
+    icon: JSX.Element,
+    name: string,
+    language: string,
+    duration: string
+}
+
+export const data: IExperience[] = [
     {
-        id: CardState.Web,
+        id: 0,
         icon: <Domain size="large" />,
-        title: 'Web',
-        subTitle: 'React, TypeScript, ASP.NET, Django',
-        message: '1.5 years',
+        name: 'Web',
+        language: 'React, TypeScript, ASP.NET, Django',
+        duration: '1.5 years',
     },
     {
-        id: CardState.Mobile,
+        id: 1,
         icon: <PhoneVertical size='large' />,
-        title: 'Mobile',
-        subTitle: 'Android (Kotlin), React Native',
-        message: '2 years'
+        name: 'Mobile',
+        language: 'Android (Kotlin), React Native',
+        duration: '2 years'
     },
     {
-        id: CardState.Database,
+        id: 2,
         icon: <ServerCluster size='large' />,
-        title: 'Database',
-        subTitle: 'PostgreSQL, MongoDB, ORM frameworks',
-        message: '1.5 years'
+        name: 'Database',
+        language: 'PostgreSQL, MongoDB, ORM frameworks',
+        duration: '1.5 years'
     },
     {
-        id: CardState.DataScience,
+        id: 3,
         icon: <Test size='large' />,
-        title: 'Data Science',
-        subTitle: 'Scikitlearn (Python)',
-        message: '6 months'
+        name: 'Data Science',
+        language: 'Scikitlearn (Python)',
+        duration: '6 months'
     },
     {
-        id: CardState.DataVis,
+        id: 4,
         icon: <LineChart size='large' />,
-        title: 'Data Visualization',
-        subTitle: 'D3.js, React, TypeScript',
-        message: '3 months'
+        name: 'Data Visualization',
+        language: 'D3.js, React, TypeScript',
+        duration: '3 months'
     },
     {
-        id: CardState.Embedded,
+        id: 5,
         icon: <System size='large' />,
-        title: 'Embedded Systems',
-        subTitle: 'Arduino (C++)',
-        message: '9 months'
+        name: 'Embedded Systems',
+        language: 'Arduino (C++)',
+        duration: '9 months'
     },
-    
 ];
