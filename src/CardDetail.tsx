@@ -7,10 +7,17 @@ import { IExperience } from './data/cardData';
 interface CardDetailProps {
     experience: IExperience;
     onBack: () => void;
+    height: number | null;
 }
 export function CardDetail(props: CardDetailProps){ 
- 
+
+    function getHeight(){
+        if(props.height) return props.height;
+        return undefined;
+    }
+
     return(
+        <div style={{height: getHeight()}}>
         <Box gap="medium">
             <Box direction="row" gap="medium">
                 <Button plain icon={<Previous />} onClick={props.onBack} />
@@ -19,5 +26,6 @@ export function CardDetail(props: CardDetailProps){
             
             <Text>{props.experience.description}</Text>
         </Box>
+        </div>
     )
 }

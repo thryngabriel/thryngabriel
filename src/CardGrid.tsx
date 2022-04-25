@@ -25,11 +25,22 @@ interface InterestCardProps {
 
 
 interface CardGridProps{
-    clickFunc: (id: IExperience) => void;
+    clickFunc: (id: IExperience, height: number|undefined) => void;
 }
 
 export function CardGrid(props: CardGridProps) {
     const [hoverId, setHoverId] = React.useState(-1);
+    const [componentHeight, setComponentHeight] = React.useState(0);
+    const gridRef = React.useRef<HTMLDivElement|null>(null);
+
+    React.useEffect(() => {
+        var t = gridRef.current;
+        var z = 0;
+        if(t != null) {
+            z = t.clientHeight;
+        }
+        setComponentHeight(z)
+    }, [gridRef])
 
     function colorByKey(key: number) {
         if(key == hoverId) return "card_over";
@@ -37,11 +48,11 @@ export function CardGrid(props: CardGridProps) {
     };
 
     return(
-        <div>
+        <div ref={gridRef}>
             <Heading level={3} size={'medium'}>What I'm excited about:</Heading>
             <Grid gap="medium" rows="small" columns={{ count: 'fit', size: 'small' }}>
                 {data.map((value) => (
-                    <Card background={colorByKey(value.id)} key={value.id} onMouseEnter={() => setHoverId(value.id)} onMouseLeave={() => setHoverId(-1)} onClick={() => props.clickFunc(value)}>
+                    <Card background={colorByKey(value.id)} key={value.id} onMouseEnter={() => setHoverId(value.id)} onMouseLeave={() => setHoverId(-1)} onClick={() => props.clickFunc(value, componentHeight)}>
                         <CardBody pad="small">
                         <InterestCard
                             pad="small"

@@ -26,6 +26,7 @@ const AppBar = (props: JSX.IntrinsicAttributes & BoxExtendedProps & { children?:
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
   const [cardSelected, setCardSelected] = useState<IExperience|null>(null);
+  const [contentHeight, setContentHeight] = useState<number|null>(null);
 
   function getContentDirection(size: string) {
     if(size == 'small') return 'column'
@@ -35,7 +36,8 @@ function App() {
     return window.innerWidth < 1536;
   } 
 
-  const toggleDisplay = (card: IExperience|null) => {
+  const toggleDisplay = (card: IExperience|null, height?: number|undefined) => {
+    if(height) setContentHeight(height)
     setCardSelected(card);
   }
 
@@ -67,7 +69,7 @@ function App() {
                     {cardSelected == null ? (
                       <CardGrid clickFunc={toggleDisplay}/> 
                     ):
-                      <CardDetail experience={cardSelected} onBack={() => toggleDisplay(null)}/>
+                      <CardDetail experience={cardSelected} onBack={() => toggleDisplay(null)} height={contentHeight}/>
                     }
                   </Box>
                 </Box>
