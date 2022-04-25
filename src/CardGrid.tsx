@@ -1,53 +1,8 @@
 import React from 'react';
 import { Grid, Card, CardBody, CardFooter, Text, Box, Heading } from "grommet";
-import { Domain, PhoneVertical, ServerCluster, Test, LineChart, System } from "grommet-icons";
-import { theme } from './GlobalTheme';
+import {data} from './data/cardData'
+import { CardState } from './data/CardState';
 
-const data = [
-    {
-        id: "0",
-        icon: <Domain size="large" />,
-        title: 'Web',
-        subTitle: 'React, TypeScript, ASP.NET, Django',
-        message: '1.5 years',
-    },
-    {
-        id: "1",
-        icon: <PhoneVertical size='large' />,
-        title: 'Mobile',
-        subTitle: 'Android (Kotlin), React Native',
-        message: '2 years'
-    },
-    {
-        id: "2",
-        icon: <ServerCluster size='large' />,
-        title: 'Database',
-        subTitle: 'PostgreSQL, MongoDB, ORM frameworks',
-        message: '1.5 years'
-    },
-    {
-        id: "3",
-        icon: <Test size='large' />,
-        title: 'Data Science',
-        subTitle: 'Scikitlearn (Python)',
-        message: '6 months'
-    },
-    {
-        id: "4",
-        icon: <LineChart size='large' />,
-        title: 'Data Visualization',
-        subTitle: 'D3.js, React, TypeScript',
-        message: '3 months'
-    },
-    {
-        id: "5",
-        icon: <System size='large' />,
-        title: 'Embedded Systems',
-        subTitle: 'Arduino (C++)',
-        message: '9 months'
-    },
-    
-  ];
 
 interface InterestCardProps {
     children: any,
@@ -71,13 +26,13 @@ interface InterestCardProps {
 
 
 interface CardGridProps{
-    clickFunc: (id: string) => void;
+    clickFunc: (id: CardState) => void;
 }
 
 export function CardGrid(props: CardGridProps) {
-    const [hoverId, setHoverId] = React.useState("");
+    const [hoverId, setHoverId] = React.useState(CardState.Grid);
 
-    function colorByKey(key: string) {
+    function colorByKey(key: CardState) {
         if(key == hoverId) return "card_over";
         return "card"
     };
@@ -87,7 +42,7 @@ export function CardGrid(props: CardGridProps) {
                 <Heading level={3} size={'medium'}>What I'm excited about:</Heading>
                     <Grid gap="medium" rows="small" columns={{ count: 'fit', size: 'small' }}>
                         {data.map((value) => (
-                            <Card background={colorByKey(value.id)} key={value.message} onMouseEnter={() => setHoverId(value.id)} onMouseLeave={() => setHoverId("")} onClick={() => props.clickFunc(value.id)}>
+                            <Card background={colorByKey(value.id)} key={value.message} onMouseEnter={() => setHoverId(value.id)} onMouseLeave={() => setHoverId(CardState.Grid)} onClick={() => props.clickFunc(value.id)}>
                                 <CardBody pad="small">
                                 <InterestCard
                                     pad="small"

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import './App.css';
-import { Grommet, Box, Button, Heading, Collapsible, BoxExtendedProps, ResponsiveContext, Layer, Card, CardBody, CardFooter, Grid, Text, Anchor, Footer, Main, ThemeType} from 'grommet';
-import { Notification, FormClose, Domain, PhoneVertical, Test, LineChart, Linkedin, Github, ServerCluster, System, Menu} from 'grommet-icons';
+import { Grommet, Box, Button, Heading, Collapsible, BoxExtendedProps, ResponsiveContext, Layer, Text } from 'grommet';
+import { FormClose, Menu} from 'grommet-icons';
 import { Social } from "./Social";
 import { theme } from "./GlobalTheme";
 import { CardGrid } from "./CardGrid";
 import { CardDetail } from "./CardDetail";
+import { CardState } from "./data/CardState";
 
 
 
@@ -24,14 +25,9 @@ const AppBar = (props: JSX.IntrinsicAttributes & BoxExtendedProps & { children?:
   />
 );
 
-
-
-//F9EAF3
-
-
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [cardState, setCardState] = useState(true)
+  const [cardState, setCardState] = useState(CardState.Grid)
 
   function getContentDirection(size: string) {
     if(size == 'small') return 'column'
@@ -41,9 +37,9 @@ function App() {
     return window.innerWidth < 1536;
   } 
 
-  const toggleDisplay = (id: string) => {
-    alert(id)
-    setCardState(false)
+  const toggleDisplay = (state: CardState) => {
+    alert(state.toString());
+    setCardState(state);
   }
 
   return (
@@ -71,13 +67,11 @@ function App() {
               <Box flex align='center' justify='center' >
                 <Box pad='large' fill justify="center" height={'xlarge'}>
                   <Box background={"white"} round pad="medium" border={{color: "#d470a2", size: "medium"}} overflow={{vertical: 'auto'}} >
-                    {cardState ? (
+                    {cardState == CardState.Grid ? (
                       <CardGrid clickFunc={toggleDisplay}/> 
                     ):
-                      <CardDetail />
+                      <CardDetail cardState={cardState}/>
                     }
-                    
-                    
                   </Box>
                 </Box>
               </Box>
