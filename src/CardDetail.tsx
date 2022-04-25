@@ -1,18 +1,23 @@
-import { Box, Text } from 'grommet';
-import React, { useEffect } from 'react';
-import { data, IExperience } from './data/cardData';
+import React from 'react';
+import { Box, Button, Text } from 'grommet';
+import { Previous } from "grommet-icons";
+import { IExperience } from './data/cardData';
 
 
 interface CardDetailProps {
-    experience: IExperience
+    experience: IExperience;
+    onBack: () => void;
 }
 export function CardDetail(props: CardDetailProps){ 
  
-    
     return(
-        <Box>
-            <Text>Hello world {props.experience.name}</Text>
-            <Text>{props.experience.language}]</Text>
+        <Box gap="medium">
+            <Box direction="row" gap="medium">
+                <Button plain icon={<Previous />} onClick={props.onBack} />
+                <Text>{props.experience.name}</Text>
+            </Box>
+            
+            <Text>{props.experience.description}</Text>
         </Box>
     )
 }

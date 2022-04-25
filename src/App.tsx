@@ -67,7 +67,7 @@ function App() {
                     {cardSelected == null ? (
                       <CardGrid clickFunc={toggleDisplay}/> 
                     ):
-                      <CardDetail experience={cardSelected}/>
+                      <CardDetail experience={cardSelected} onBack={() => toggleDisplay(null)}/>
                     }
                   </Box>
                 </Box>
