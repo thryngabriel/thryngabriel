@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { initializeApp } from 'firebase/app';
+
 import './App.css';
 import { Grommet, Box, Button, Heading, Collapsible, BoxExtendedProps, ResponsiveContext, Layer, Text } from 'grommet';
 import { FormClose, Menu} from 'grommet-icons';
@@ -7,6 +9,18 @@ import { theme } from "./GlobalTheme";
 import { CardGrid } from "./CardGrid";
 import { CardDetail } from "./CardDetail";
 import { IExperience } from "./data/cardData";
+
+// Hosting information (none of this is secret)
+const firebaseConfig = {
+  piKey: process.env.REACT_APP_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PID,
+  storageBucket: process.env.REACT_APP_STORAGE,
+  messagingSenderId: process.env.REACT_APP_SENDER_ID,
+  appId: process.env.REACT_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
+};
+const app = initializeApp(firebaseConfig);
 
 
 const AppBar = (props: JSX.IntrinsicAttributes & BoxExtendedProps & { children?: React.ReactNode; }) => (
