@@ -8,7 +8,7 @@ const Media = () => {
     <Box direction='row' gap='xxsmall' justify='center'>
         <Anchor
             a11yTitle='Check out my Github'
-            href='https://github.com/kgabriel113'
+            href='https://github.com/thryngabriel'
             icon={<Github color='brand' />}
         />
         <Anchor
